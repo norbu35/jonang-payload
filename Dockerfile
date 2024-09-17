@@ -45,6 +45,7 @@ FROM node:19.6-bullseye-slim
 COPY --chown=node:node --from=build /usr/src/app/dist ./dist
 COPY --chown=node:node --from=build /usr/src/app/build ./build
 COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
+COPY --chown=node:node --from=build /usr/src/app/dist/payload.config.js ./dist/payload.config.js
 
 EXPOSE 3000
 
