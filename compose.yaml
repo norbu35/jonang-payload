@@ -15,6 +15,7 @@ services:
       DATABASE_URI: ${DATABASE_URI}
       PORT: ${PORT}
       PAYLOAD_SECRET: ${PAYLOAD_SECRET}
+      NODE_OPTIONS: ${NODE_OPTIONS}
     restart: unless-stopped
 
   mongo:
