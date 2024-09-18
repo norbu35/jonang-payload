@@ -16,7 +16,8 @@ services:
       PORT: ${PORT}
       PAYLOAD_SECRET: ${PAYLOAD_SECRET}
       NODE_OPTIONS: ${NODE_OPTIONS}
-    restart: unless-stopped
+      PAYLOAD_PUBLIC_SERVER_URL: ${PAYLOAD_PUBLIC_SERVER_URL}
+    restart: always
 
   mongo:
     image: mongo:latest
@@ -29,7 +30,7 @@ services:
       - database:/data/db
     logging:
       driver: none
-    restart: unless-stopped
+    restart: always
 
 volumes:
   database:

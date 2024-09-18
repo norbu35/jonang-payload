@@ -52,7 +52,7 @@ export default buildConfig({
     Donations,
     Quotes,
   ],
-  serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost',
+  serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
   typescript: {
     outputFile: path.resolve(__dirname, "payload-types.ts"),
   },
@@ -85,6 +85,3 @@ export default buildConfig({
     },
   },
 })
-
-const serverURL = process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost';
-console.log('Server URL:', serverURL);
