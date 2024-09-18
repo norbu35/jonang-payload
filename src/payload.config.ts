@@ -84,4 +84,7 @@ export default buildConfig({
       fileSize: 3000000,
     },
   },
-});
+})
+
+const serverURL = process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost';
+console.log('Server URL:', serverURL);
