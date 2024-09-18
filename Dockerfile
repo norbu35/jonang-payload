@@ -21,6 +21,8 @@ CMD ["npm", "run", "dev"]
 # Build stage
 FROM base AS build
 
+WORKDIR /usr/src/app
+
 RUN --mount=type=cache,target=/usr/src/app/.npm \
     npm set cache /usr/src/app/.npm && \
     npm install
@@ -32,6 +34,8 @@ RUN npm run build
 # Runtime stage
 FROM node:19.6-bullseye-slim AS runtime
 
+WORKDIR /usr/src/app
+
 ENV NODE_ENV=production
 ENV PAYLOAD_CONFIG_PATH=dist/payload.config.js
 
@@ -41,10 +45,11 @@ RUN --mount=type=cache,target=/usr/src/app/.npm \
   npm set cache /usr/src/app/.npm && \
   npm ci --only=production
 
-USER node
 
 COPY --chown=node:node --from=build /usr/src/app/dist ./dist
 COPY --chown=node:node --from=build /usr/src/app/build ./build
+
+USER node
 
 EXPOSE 3000
 
