@@ -25,7 +25,7 @@ RUN --mount=type=cache,target=/usr/src/app/.npm \
     npm set cache /usr/src/app/.npm && \
     npm install
 
-COPY --chown=node:node . .
+COPY . .
 
 RUN npm run build
 
@@ -44,12 +44,7 @@ RUN --mount=type=cache,target=/usr/src/app/.npm \
 COPY --from=build /usr/src/app/dist ./dist
 COPY --from=build /usr/src/app/build ./build
 
-RUN chown -R node:node ./dist ./build && \
-    chmod -R 755 ./dist ./build
-
 EXPOSE 3000
-
-USER node
 
 CMD ["node", "dist/server.js"]
 
