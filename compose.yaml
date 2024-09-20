@@ -29,7 +29,7 @@ services:
     volumes:
       - database:/data/db
     logging:
-      driver: none
+      driver: json-file
     restart: always
 
 volumes:

@@ -1,9 +1,23 @@
-build
-dist
-/media
-node_modules/
-.DS_Store
+# Secrets
 .env
+
+# npm
 .npm
+node_modules/
+
+# Docker
 compose-dev.yaml
+
+# Build
+build/
+dist/
+media/
+
+# Backups
+backups/
+
+# Scripts
 Makefile
+
+# OS
+.DS_Store

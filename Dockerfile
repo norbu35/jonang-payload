@@ -32,7 +32,7 @@ COPY --chown=node:node . .
 RUN npm run build
 
 # Runtime stage
-FROM node:19.6-bullseye-slim AS runtime
+FROM node:19.6-bullseye-slim
 
 WORKDIR /usr/src/app
 
