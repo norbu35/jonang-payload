@@ -1,36 +1,18 @@
 services:
   payload:
-    image: app
+    image: jonang-payload
     build:
       context: .
       dockerfile: Dockerfile
     init: true
     ports:
       - "3000:3000"
-    depends_on:
-      - mongo
     env_file:
       - .env
     environment:
-      DATABASE_URI: ${DATABASE_URI}
-      PORT: ${PORT}
       PAYLOAD_SECRET: ${PAYLOAD_SECRET}
-      NODE_OPTIONS: ${NODE_OPTIONS}
       PAYLOAD_PUBLIC_SERVER_URL: ${PAYLOAD_PUBLIC_SERVER_URL}
+      PORT: ${PORT}
+      DATABASE_URI: ${DATABASE_URI}
+      NODE_OPTIONS: ${NODE_OPTIONS}
     restart: always
-
-  mongo:
-    image: mongo:latest
-    init: true
-    ports:
-      - "27017:27017"
-    command:
-      - --storageEngine=wiredTiger
-    volumes:
-      - database:/data/db
-    logging:
-      driver: json-file
-    restart: always
-
-volumes:
-  database:

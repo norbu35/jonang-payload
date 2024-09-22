@@ -31,7 +31,7 @@ export default buildConfig({
     user: Users.slug,
     bundler: webpackBundler(),
     livePreview: {
-      url: `${process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost'}:${process.env.LIVE_PREVIEW_PORT || 3000}`,
+      url: `${process.env.PAYLOAD_PUBLIC_SERVER_URL || "http://localhost"}:${process.env.LIVE_PREVIEW_PORT || 3000}`,
       collections: ["newsletters", "pages"],
     },
     components: {
@@ -52,7 +52,7 @@ export default buildConfig({
     Donations,
     Quotes,
   ],
-  serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
+  serverURL: "http://localhost:3000",
   typescript: {
     outputFile: path.resolve(__dirname, "payload-types.ts"),
   },
@@ -74,8 +74,6 @@ export default buildConfig({
     max: 1000,
     trustProxy: true,
   },
-  cors: [process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(Boolean),
-  csrf: [process.env.PAYLOAD_PUBLIC_SERVER_URL || ''].filter(Boolean),
   graphQL: {
     disable: true,
   },
@@ -84,4 +82,6 @@ export default buildConfig({
       fileSize: 3000000,
     },
   },
-})
+});
+
+console.log(process.env.PAYLOAD_PUBLIC_SERVER_URL);
