@@ -1,17 +1,16 @@
 services:
   payload:
-    image: jonang-payload
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        NODE_OPTIONS: ${NODE_OPTIONS}
     init: true
     ports:
       - "3000:3000"
-    env_file:
-      - .env
     environment:
       PAYLOAD_SECRET: ${PAYLOAD_SECRET}
-      PAYLOAD_PUBLIC_SERVER_URL: ${PAYLOAD_PUBLIC_SERVER_URL}
+      PAYLOAD_PUBLIC_URL: ${PAYLOAD_PUBLIC_URL}
       PORT: ${PORT}
       DATABASE_URI: ${DATABASE_URI}
       NODE_OPTIONS: ${NODE_OPTIONS}

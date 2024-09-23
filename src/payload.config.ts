@@ -31,7 +31,7 @@ export default buildConfig({
     user: Users.slug,
     bundler: webpackBundler(),
     livePreview: {
-      url: `${process.env.PAYLOAD_PUBLIC_SERVER_URL || "http://localhost"}:${process.env.LIVE_PREVIEW_PORT || 3000}`,
+      url: `${process.env.PAYLOAD_PUBLIC_URL}:${process.env.LIVE_PREVIEW_PORT}`,
       collections: ["newsletters", "pages"],
     },
     components: {
@@ -52,7 +52,9 @@ export default buildConfig({
     Donations,
     Quotes,
   ],
-  serverURL: "http://localhost:3000",
+  serverURL: `${process.env.PAYLOAD_PUBLIC_URL}:${process.env.PORT}`,
+  cors: [process.env.PAYLOAD_PUBLIC_URL],
+  csrf: [process.env.PAYLOAD_PUBLIC_URL],
   typescript: {
     outputFile: path.resolve(__dirname, "payload-types.ts"),
   },
@@ -83,5 +85,3 @@ export default buildConfig({
     },
   },
 });
-
-console.log(process.env.PAYLOAD_PUBLIC_SERVER_URL);
