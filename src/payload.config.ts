@@ -31,7 +31,7 @@ export default buildConfig({
     user: Users.slug,
     bundler: webpackBundler(),
     livePreview: {
-      url: `${process.env.PAYLOAD_PUBLIC_URL}:${process.env.LIVE_PREVIEW_PORT}`,
+      url: `${process.env.PAYLOAD_PUBLIC_SERVER_URL}:${process.env.LIVE_PREVIEW_PORT}`,
       collections: ["newsletters", "pages"],
     },
     components: {
@@ -52,9 +52,9 @@ export default buildConfig({
     Donations,
     Quotes,
   ],
-  serverURL: `${process.env.PAYLOAD_PUBLIC_URL}:${process.env.PORT}`,
-  cors: [process.env.PAYLOAD_PUBLIC_URL],
-  csrf: [process.env.PAYLOAD_PUBLIC_URL],
+  serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
+  cors: [process.env.PAYLOAD_PUBLIC_SERVER_URL],
+  csrf: [process.env.PAYLOAD_PUBLIC_SERVER_URL],
   typescript: {
     outputFile: path.resolve(__dirname, "payload-types.ts"),
   },
@@ -69,7 +69,7 @@ export default buildConfig({
       generateTitle: ({ doc }) => `Jonang Monastery | ${doc?.title?.value}`,
       generateDescription: ({ doc }) => doc?.excerpt?.value,
       generateURL: ({ doc }) =>
-        `https://jonang.in/${collection?.slug}/${doc?.slug?.value}`,
+        `${process.env.WEBSITE_URL}/${collection?.slug}/${doc?.slug?.value}`,
     }),
   ],
   rateLimit: {
