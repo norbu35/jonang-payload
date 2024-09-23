@@ -11,7 +11,6 @@ compose-dev.yaml
 # Build
 build/
 dist/
-media/
 
 # Backups
 backups/
@@ -21,3 +20,6 @@ Makefile
 
 # OS
 .DS_Store
+
+# Build files
+src/**/*.{jpg,jpeg,png,webp}
