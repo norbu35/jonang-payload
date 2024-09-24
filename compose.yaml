@@ -1,7 +1,21 @@
 services:
-  payload:
+  app:
     build: .
     init: true
+    restart: always
     ports:
       - "3000:3000"
-    restart: always
+    env_file:
+      - .env
+    environment:
+      PAYLOAD_SECRET: "${PAYLOAD_SECRET}"
+      PAYLOAD_PUBLIC_SERVER_URL: "${PAYLOAD_PUBLIC_SERVER_URL}"
+      PORT: "${PORT}"
+      DATABASE_URI: "${DATABASE_URI}"
+      LIVE_PREVIEW_PORT: "${LIVE_PREVIEW_PORT}"
+      WEBSITE_URL: "${WEBSITE_URL}"
+    volumes:
+      - uploads:/usr/src/app/uploads
+
+volumes:
+  uploads:
