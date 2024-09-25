@@ -1,1 +1,1 @@
-bash ../scripts/sync-compose.sh
+bash ./scripts/sync-compose.sh
