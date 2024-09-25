@@ -22,7 +22,7 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -t norbu35/jonang-payload:latest .
+          docker build --target runtime -t norbu35/jonang-payload:latest .
           docker push norbu35/jonang-payload:latest
 
       - name: Deploy Docker image
