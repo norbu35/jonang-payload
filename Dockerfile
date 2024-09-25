@@ -26,7 +26,7 @@ RUN npm ci --only=production
 COPY --chown=node:node --from=0 /usr/src/app/dist ./dist
 COPY --chown=node:node --from=0 /usr/src/app/build ./build
 
-RUN mkdir uploads && chown -R /usr/src/app
+RUN mkdir uploads && chown -R node:node /usr/src/app
 
 USER node
 
