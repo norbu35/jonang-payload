@@ -17,6 +17,7 @@ backups/
 
 # Scripts
 Makefile
+scripts/sync-compose.sh
 
 # OS
 .DS_Store
@@ -26,6 +27,3 @@ src/**/*.{jpg,jpeg,png,webp}
 src/portraits/
 src/media/
 src/assets/
-
-# Local scripts
-scripts/sync-compose.sh
