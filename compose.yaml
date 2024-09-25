@@ -1,6 +1,6 @@
 services:
   app:
-    image: norbu35/jonang-payload:latest
+    image: 264abffb5c54
     init: true
     restart: always
     ports:
