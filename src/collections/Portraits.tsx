@@ -10,7 +10,7 @@ const Portraits: CollectionConfig = {
   },
   upload: {
     staticURL: "/portraits",
-    staticDir: "/uploads/portraits",
+    staticDir: "./uploads/portraits",
     imageSizes: [
       {
         name: "thumbnail",

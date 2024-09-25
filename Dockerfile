@@ -28,6 +28,7 @@ COPY --chown=node:node --from=0 /usr/src/app/build ./build
 
 RUN mkdir ./uploads && chown node:node ./uploads
 
+USER node
 
 EXPOSE 3000
 
