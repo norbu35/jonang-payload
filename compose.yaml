@@ -16,7 +16,7 @@ services:
       WEBSITE_URL: ${WEBSITE_URL}
       NODE_OPTIONS: ${NODE_OPTIONS}
     volumes:
-      - uploads:/usr/src/app/uploads
+      - uploads:/usr/src/app/dist/uploads
 
 volumes:
   uploads:
