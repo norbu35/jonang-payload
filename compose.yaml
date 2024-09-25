@@ -1,6 +1,6 @@
 services:
   app:
-    build: .
+    build: norbu35/payload:latest
     init: true
     restart: always
     ports:
@@ -8,12 +8,13 @@ services:
     env_file:
       - .env
     environment:
-      PAYLOAD_SECRET: "${PAYLOAD_SECRET}"
-      PAYLOAD_PUBLIC_SERVER_URL: "${PAYLOAD_PUBLIC_SERVER_URL}"
-      PORT: "${PORT}"
-      DATABASE_URI: "${DATABASE_URI}"
-      LIVE_PREVIEW_PORT: "${LIVE_PREVIEW_PORT}"
-      WEBSITE_URL: "${WEBSITE_URL}"
+      PAYLOAD_SECRET: ${PAYLOAD_SECRET}
+      PAYLOAD_PUBLIC_SERVER_URL: ${PAYLOAD_PUBLIC_SERVER_URL}
+      PORT: ${PORT}
+      DATABASE_URI: ${DATABASE_URI}
+      LIVE_PREVIEW_PORT: ${LIVE_PREVIEW_PORT}
+      WEBSITE_URL: ${WEBSITE_URL}
+      NODE_OPTIONS: ${NODE_OPTIONS}
     volumes:
       - uploads:/usr/src/app/uploads
 

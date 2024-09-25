@@ -26,3 +26,6 @@ src/**/*.{jpg,jpeg,png,webp}
 src/portraits/
 src/media/
 src/assets/
+
+# Local scripts
+scripts/sync-compose.sh

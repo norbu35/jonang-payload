@@ -1,14 +1,8 @@
-# Base image
-FROM node:alpine AS base
-
-LABEL org.opencontainers.image.authors="norbu"
+FROM node:apline AS development
 
 WORKDIR /usr/src/app
 
 COPY package*.json .
-
-# Development stage
-FROM base AS development
 
 RUN --mount=type=cache,target=/usr/src/app/.npm \
     npm set cache /usr/src/app/.npm && \
@@ -18,8 +12,12 @@ COPY . .
 
 CMD ["npm", "run", "dev"]
 
-# Build stage
-FROM base AS build
+
+FROM node:alpine AS build
+
+WORKDIR /usr/src/app
+
+COPY package*.json .
 
 RUN --mount=type=cache,target=/usr/src/app/.npm \
     npm set cache /usr/src/app/.npm && \
@@ -35,13 +33,16 @@ FROM node:alpine
 ENV NODE_ENV=production
 ENV PAYLOAD_CONFIG_PATH=dist/payload.config.js
 
+WORKDIR /usr/src/app
+
 COPY package*.json .
 RUN npm ci --only=production
 
 COPY --chown=node:node --from=build /usr/src/app/dist ./dist
 COPY --chown=node:node --from=build /usr/src/app/build ./build
 
-RUN mkdir uploads && chown node:node uploads
+RUN mkdir uploads
+RUN chown node:node uploads
 
 USER node
 
