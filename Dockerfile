@@ -27,7 +27,7 @@ COPY --chown=node:node . .
 
 RUN npm run build
 
-# Runtime stage
+
 FROM node:alpine
 
 ENV NODE_ENV=production
