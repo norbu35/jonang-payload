@@ -53,8 +53,8 @@ export default buildConfig({
     Quotes,
   ],
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
-  cors: [process.env.PAYLOAD_PUBLIC_SERVER_URL || ""].filter(Boolean),
-  csrf: [process.env.PAYLOAD_PUBLIC_SERVER_URL || ""].filter(Boolean),
+  cors: [process.env.PAYLOAD_PUBLIC_SERVER_URL || "*"].filter(Boolean),
+  csrf: [process.env.PAYLOAD_PUBLIC_SERVER_URL || "*"].filter(Boolean),
   typescript: {
     outputFile: path.resolve(__dirname, "payload-types.ts"),
   },
