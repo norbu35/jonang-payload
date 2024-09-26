@@ -1,4 +1,4 @@
-FROM node:alpine AS builder
+FROM node:alpine
 
 WORKDIR /usr/src/app
 
@@ -22,8 +22,10 @@ ENV PAYLOAD_CONFIG_PATH=dist/payload.config.js
 COPY package*.json ./
 RUN npm ci --only=production
 
-COPY --chown=node:node --from=builder /usr/src/app/dist ./dist
-COPY --chown=node:node --from=builder /usr/src/app/build ./build
+COPY --chown=node:node --from=0 /usr/src/app/dist ./dist
+COPY --chown=node:node --from=0 /usr/src/app/build ./build
+
+RUN mkdir -p ./dist/uploads && chown node:node ./dist/uploads
 
 USER node
 
