@@ -61,6 +61,7 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI,
   }),
+  loggerDestination: "./log",
   plugins: [
     seoPlugin({
       tabbedUI: true,
