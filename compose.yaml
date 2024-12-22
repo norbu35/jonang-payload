@@ -1,0 +1,22 @@
+services:
+  app:
+    image: norbu35/jonang-payload
+    init: true
+    restart: always
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    environment:
+      PAYLOAD_SECRET: ${PAYLOAD_SECRET}
+      PAYLOAD_PUBLIC_SERVER_URL: ${PAYLOAD_PUBLIC_SERVER_URL}
+      PORT: ${PORT}
+      DATABASE_URI: ${DATABASE_URI}
+      LIVE_PREVIEW_PORT: ${LIVE_PREVIEW_PORT}
+      WEBSITE_URL: ${WEBSITE_URL}
+      NODE_OPTIONS: ${NODE_OPTIONS}
+    volumes:
+      - uploads:/usr/src/app/dist/uploads
+
+volumes:
+  uploads:

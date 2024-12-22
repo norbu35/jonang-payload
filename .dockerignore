@@ -1,0 +1,9 @@
+.dockerignore
+Dockerfile
+.env
+.git
+node_modules/
+backups/
+dist/
+build/
+scripts/
