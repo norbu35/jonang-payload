@@ -1,11 +1,11 @@
-import React from "react";
-import { render } from "@react-email/render";
-import { Html, Text } from "@react-email/components";
-import { Document } from "payload/types";
+import React from 'react'
+import { render } from '@react-email/render'
+import { Html, Text } from '@react-email/components'
+import type { Document } from 'payload'
 
 type Props = {
-  contents: Document;
-};
+  contents: Document
+}
 
 const Template: React.FC<Props> = ({ contents }) => {
   return (
@@ -13,9 +13,9 @@ const Template: React.FC<Props> = ({ contents }) => {
       <Text>This is a test newsletter</Text>
       {contents.bodyHtml}
     </Html>
-  );
-};
+  )
+}
 
 export function newsletter(data: Props) {
-  return render(<Template {...data} />);
+  return render(<Template {...data} />)
 }
