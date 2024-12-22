@@ -109,7 +109,7 @@ export default buildConfig({
       generateTitle: ({ doc }) => `Jonang Monastery | ${doc?.title?.value}`,
       generateDescription: ({ doc }) => doc?.excerpt?.value,
       generateURL: ({ doc }) =>
-        `${process.env.WEBSITE_URL}/${collection?.slug}/${doc?.slug?.value}`,
+        `${process.env.WEBSITE_URL}/${doc.collection?.slug}/${doc?.slug?.value}`,
     }),
   ],
   graphQL: {
