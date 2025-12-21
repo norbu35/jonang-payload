@@ -16,6 +16,6 @@ const Template: React.FC<Props> = ({ contents }) => {
   )
 }
 
-export function newsletter(data: Props) {
+export async function newsletter(data: Props) {
   return render(<Template {...data} />)
 }

@@ -1,6 +1,6 @@
 # From https://github.com/vercel/next.js/blob/canary/examples/with-docker/Dockerfile
 
-FROM node:18-alpine AS base
+FROM node:24-alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps
@@ -23,6 +23,7 @@ FROM base AS builder
 WORKDIR /usr/src/app
 COPY --from=deps usr/src/app/node_modules ./node_modules
 COPY . .
+RUN mkdir -p /usr/src/app/public
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
@@ -40,31 +41,34 @@ RUN \
 FROM base AS runner
 WORKDIR /usr/src/app
 
-ENV NODE_ENV production
+ENV NODE_ENV=production
+ENV HOSTNAME=0.0.0.0
 # Uncomment the following line in case you want to disable telemetry during runtime.
 # ENV NEXT_TELEMETRY_DISABLED 1
+
+RUN apk add --no-cache su-exec
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-# Remove this line if you do not have this folder
-# COPY --from=builder /app/public ./public
+# Copy standalone output from Next build
+COPY --from=builder --chown=nextjs:nodejs /usr/src/app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /usr/src/app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /usr/src/app/.next/static ./.next/static
 
-# Set the correct permission for prerender cache
-RUN mkdir .next
-RUN chown nextjs:nodejs .next
+COPY docker-entrypoint.sh /usr/src/app/docker-entrypoint.sh
+RUN chmod +x /usr/src/app/docker-entrypoint.sh
 
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-# COPY --from=builder --chown=nextjs:nodejs usr/src/app/.next/standalone ./
-# COPY --from=builder --chown=nextjs:nodejs usr/src/app/.next/static ./.next/static
+# Ensure writable paths for runtime cache and uploads
+RUN mkdir -p /usr/src/app/.next /usr/src/app/uploads
+RUN chown -R nextjs:nodejs /usr/src/app/.next /usr/src/app/uploads
 
-USER nextjs
+ENTRYPOINT ["./docker-entrypoint.sh"]
 
 EXPOSE 3000
 
-ENV PORT 3000
+ENV PORT=3000
 
 # server.js is created by next build from the standalone output
 # https://nextjs.org/docs/pages/api-reference/next-config-js/output
-CMD HOSTNAME="0.0.0.0" node server.js
+CMD ["node", "server.js"]
